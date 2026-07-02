@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fort Knox Rare Coin &amp; Bullion — Alameda, California</title>
+<meta name="description" content="For over 30 years, Alameda's trusted buyer and seller of gold, silver, rare coins, estate jewelry, diamonds and watches. Private, secure, by appointment.">
+<style>
+  :root{
+    --navy:#14213F; --navy-deep:#0E1830; --line:#8FA3C8;
+    --gold-1:#F3D98B; --gold-2:#C9A24B; --gold-3:#8A6A24;
+    --ivory:#FBF9F4; --ink:#1C2438; --ink-dim:#5A6478; --muted:#8B93A6;
+    --serif:'Iowan Old Style','Charter','Palatino',Georgia,serif;
+    --sans:-apple-system,'SF Pro Text','Segoe UI',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--navy);color:var(--ivory);font-family:var(--sans);line-height:1.55;
+       -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .gold{background:linear-gradient(160deg,var(--gold-1) 10%,var(--gold-2) 48%,var(--gold-3) 90%);
+        -webkit-background-clip:text;background-clip:text;color:transparent}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px;position:relative}
+
+  /* ── ORNAMENT: engraved filigree, bleeding off-edge (the assay-card move) ── */
+  .engraving{position:absolute;pointer-events:none;opacity:.16;color:var(--line)}
+  .engraving svg{display:block}
+
+  /* ── HERO ── */
+  header{position:relative;overflow:hidden;padding:0 0 40px;background:
+    radial-gradient(140% 90% at 50% -30%, #1B2A52 0%, var(--navy) 55%, var(--navy-deep) 100%)}
+  .edge-text{position:absolute;left:10px;top:120px;writing-mode:vertical-rl;transform:rotate(180deg);
+    font-size:10px;letter-spacing:.42em;color:var(--line);opacity:.75;text-transform:uppercase;font-family:var(--sans)}
+  .hero{padding:64px 0 8px;text-align:center;position:relative;z-index:2}
+  .crest{width:74px;height:74px;margin:0 auto 18px;border:1.5px solid var(--gold-2);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;position:relative}
+  .crest::after{content:"";position:absolute;inset:5px;border:.75px solid var(--gold-3);border-radius:50%;opacity:.7}
+  .crest svg{width:38px;height:38px;stroke:var(--gold-1);fill:none;stroke-width:1.3}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,7vw,58px);letter-spacing:.22em;
+     text-indent:.22em;line-height:1.12}
+  .sub{margin-top:12px;font-size:clamp(11px,2.6vw,13.5px);letter-spacing:.34em;text-indent:.34em;
+       text-transform:uppercase;color:var(--gold-2);font-family:var(--sans)}
+  .est{margin-top:22px;font-family:var(--serif);font-style:italic;font-size:clamp(15px,3.4vw,18px);color:#C7D2E8}
+  .hero-rule{width:120px;height:1px;margin:26px auto 0;background:linear-gradient(90deg,transparent,var(--gold-2),transparent)}
+  .hero-cta{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 26px;border-radius:6px;font-size:13px;letter-spacing:.14em;
+       text-transform:uppercase;text-decoration:none;font-family:var(--sans)}
+  .btn-gold{background:linear-gradient(160deg,var(--gold-1),var(--gold-2) 70%);color:#241A05;font-weight:650}
+  .btn-line{border:1px solid var(--line);color:var(--ivory)}
+
+  /* ── WHITE ASSAY WINDOW (the core device) ── */
+  .window{background:var(--ivory);color:var(--ink);border-radius:16px;
+    box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 24px 60px -28px rgba(0,0,0,.55);
+    position:relative;z-index:2}
+
+  /* ── SPOT TICKER ── */
+  .ticker{margin:44px auto 0;max-width:720px;padding:22px 26px 18px;text-align:center}
+  .ticker .label{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8A6A24;margin-bottom:12px}
+  .ticker .row{display:flex;justify-content:center;gap:8vw;flex-wrap:wrap}
+  .metal .name{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .metal .price{font-family:var(--serif);font-size:clamp(30px,7vw,42px);font-weight:600;margin-top:2px;
+    background:linear-gradient(160deg,#A87F2E,#8A6A24);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .metal.silver .price{background:linear-gradient(160deg,#7C8798,#565F6E);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .metal .unit{font-size:10.5px;color:var(--muted);margin-top:2px}
+  .ticker .status{margin-top:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .ticker .status .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#3FB27F;margin-right:6px;vertical-align:1px}
+
+  /* ── SECTIONS ── */
+  section{padding:64px 0;position:relative;overflow:hidden}
+  .sec-head{text-align:center;margin-bottom:36px;position:relative;z-index:2}
+  .sec-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,5vw,32px);letter-spacing:.12em;text-indent:.12em}
+  .sec-head .kicker{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:10px}
+  .sec-head p{max-width:56ch;margin:14px auto 0;color:#B9C4DA;font-size:15px}
+
+  /* category cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;position:relative;z-index:2}
+  .card{padding:26px 24px 22px;text-align:center}
+  .card svg{width:44px;height:44px;stroke:#8A6A24;fill:none;stroke-width:1.4;margin-bottom:12px}
+  .card h3{font-family:var(--serif);font-size:19px;letter-spacing:.06em;color:var(--ink)}
+  .card p{font-size:13.5px;color:#5A6478;margin-top:8px;line-height:1.5}
+  .card .tag{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:#8A6A24;border-top:1px solid #E4DCC8;padding-top:10px}
+
+  /* appraisal band */
+  .appraise{background:var(--navy-deep);border-top:1px solid rgba(143,163,200,.18);border-bottom:1px solid rgba(143,163,200,.18)}
+  .appraise-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:stretch;position:relative;z-index:2}
+  @media(max-width:840px){.appraise-grid{grid-template-columns:1fr}}
+  .appraise .pitch h2{font-family:var(--serif);font-size:clamp(24px,4.6vw,30px);letter-spacing:.06em;line-height:1.3}
+  .appraise .pitch p{color:#B9C4DA;margin-top:14px;max-width:52ch}
+  .assure{margin-top:20px;display:grid;gap:10px}
+  .assure div{display:flex;gap:10px;align-items:baseline;font-size:14px;color:#D5DCEC}
+  .assure b{color:var(--gold-1);font-weight:600}
+  .book{padding:26px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+  .book .k{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:#8A6A24}
+  .book .phone{font-family:var(--serif);font-size:clamp(26px,6vw,34px);font-weight:600;color:var(--ink);
+    text-decoration:none;display:block;margin:10px 0 2px}
+  .book .hours{font-size:13px;color:#5A6478;line-height:1.7;margin-top:10px}
+  .book .btn{margin-top:16px}
+
+  /* visit */
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative;z-index:2}
+  @media(max-width:840px){.visit-grid{grid-template-columns:1fr}}
+  .visit-card{padding:26px}
+  .visit-card h3{font-family:var(--serif);font-size:20px;color:var(--ink);letter-spacing:.04em}
+  .visit-card p{font-size:14px;color:#5A6478;margin-top:10px;line-height:1.7}
+  .visit-card iframe{width:100%;height:240px;border:0;border-radius:10px;margin-top:8px;filter:saturate(.85)}
+
+  /* hallmarks footer */
+  footer{padding:46px 0 40px;background:var(--navy-deep);text-align:center;position:relative;overflow:hidden}
+  .hallmarks{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+  .hallmark{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--line);
+    border:1px solid rgba(143,163,200,.35);border-radius:4px;padding:8px 14px}
+  .fine{margin-top:26px;font-size:11px;color:#6B7690;position:relative;z-index:2}
+  .fine a{color:var(--line)}
+  .demo-note{margin-top:14px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#4A5570}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="edge-text">Est. over thirty years · Park Street · Alameda</div>
+  <!-- bleeding engraved ornament, top-right (cropped like the assay card) -->
+  <div class="engraving" style="right:-140px;top:-60px" aria-hidden="true">
+    <svg width="520" height="560" viewBox="0 0 520 560">
+      <g stroke="currentColor" fill="none" stroke-width="1">
+        <circle cx="360" cy="150" r="130"/><circle cx="360" cy="150" r="112"/><circle cx="360" cy="150" r="94"/>
+        <g id="rosette">
+          <path d="M360,38 C395,90 395,210 360,262 C325,210 325,90 360,38 Z"/>
+          <path d="M248,150 C300,115 420,115 472,150 C420,185 300,185 248,150 Z"/>
+          <path d="M281,71 C343,80 428,165 437,227 C375,218 290,133 281,71 Z"/>
+          <path d="M439,71 C430,133 345,218 283,227 C292,165 377,80 439,71 Z"/>
+        </g>
+        <circle cx="360" cy="150" r="26"/><circle cx="360" cy="150" r="14"/>
+        <!-- wheat stalks -->
+        <path d="M120,560 C150,440 190,360 268,300"/>
+        <path d="M132,548 q-26,-10 -30,-38 q30,2 30,38 Z M150,500 q-28,-6 -36,-34 q32,-2 36,34 Z M172,452 q-28,-2 -40,-28 q32,-8 40,28 Z M198,408 q-28,2 -44,-22 q30,-12 44,22 Z"/>
+        <path d="M136,556 q22,-18 50,-12 q-14,28 -50,12 Z M158,510 q20,-22 50,-18 q-10,30 -50,18 Z M184,462 q18,-24 48,-24 q-6,32 -48,24 Z M212,418 q14,-26 46,-28 q-2,32 -46,28 Z"/>
+        <!-- coin spill -->
+        <circle cx="300" cy="420" r="22"/><circle cx="300" cy="420" r="15"/>
+        <circle cx="345" cy="455" r="18"/><circle cx="345" cy="455" r="11"/>
+        <circle cx="385" cy="420" r="14"/><circle cx="262" cy="465" r="14"/><circle cx="262" cy="465" r="8"/>
+        <circle cx="322" cy="495" r="12"/><circle cx="368" cy="500" r="9"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="crest" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M6 16 L20 7 L34 16 M9 16 V31 M31 16 V31 M6 31 H34 M14 31 V22 H26 V31 M20 13.5 V17"/></svg>
+      </div>
+      <h1 class="gold">FORT&nbsp;KNOX</h1>
+      <div class="sub">Rare Coin &amp; Bullion · Alameda, California</div>
+      <p class="est">Buying and selling gold, silver, rare coins &amp; estate treasures for over thirty years —<br>in private, by appointment, just over the Park Street bridge.</p>
+      <div class="hero-rule"></div>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="tel:+15105238000">Call 510.523.8000</a>
+        <a class="btn btn-line" href="#appraisal">Book an appraisal</a>
+      </div>
+    </div>
+
+    <!-- LIVE SPOT — the white assay window -->
+    <div class="window ticker">
+      <div class="label">Live Market — Spot Prices</div>
+      <div class="row">
+        <div class="metal gold-m"><div class="name">Gold</div><div class="price" id="xau">$4,136</div><div class="unit">per troy ounce</div></div>
+        <div class="metal silver"><div class="name">Silver</div><div class="price" id="xag">$61.68</div><div class="unit">per troy ounce</div></div>
+      </div>
+      <div class="status" id="tick-status"><span class="dot"></span>indicative — connecting to live feed…</div>
+    </div>
+  </div>
+</header>
+
+<section id="buy-sell">
+  <div class="engraving" style="left:-180px;bottom:-80px;transform:scaleX(-1);opacity:.10" aria-hidden="true">
+    <svg width="440" height="420" viewBox="80 80 440 420"><g stroke="currentColor" fill="none" stroke-width="1">
+      <circle cx="360" cy="150" r="130"/><circle cx="360" cy="150" r="94"/>
+      <path d="M360,38 C395,90 395,210 360,262 C325,210 325,90 360,38 Z"/>
+      <path d="M248,150 C300,115 420,115 472,150 C420,185 300,185 248,150 Z"/>
+      <circle cx="300" cy="420" r="22"/><circle cx="345" cy="455" r="18"/><circle cx="385" cy="420" r="14"/>
+    </g></svg>
+  </div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">What we buy &amp; sell</div>
+      <h2>Six departments. One standard.</h2>
+      <p>Every item is evaluated in-store by our senior staff — weighed, tested and priced against the live market, in front of you.</p>
+    </div>
+    <div class="cards">
+      <div class="window card">
+        <svg viewBox="0 0 44 44"><rect x="8" y="14" width="28" height="16" rx="2"/><rect x="12" y="18" width="20" height="8" rx="1"/><path d="M22 10 v-3 M14 10 l-2 -3 M30 10 l2 -3"/></svg>
+        <h3>Gold &amp; Bullion</h3><p>Bars, rounds and world gold coins — bought and sold at transparent margins against live spot.</p>
+        <div class="tag">Spot-priced daily</div>
+      </div>
+      <div class="window card">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="13"/><circle cx="22" cy="22" r="8.5"/><path d="M22 14.5 v15 M18 18 h8 M18 26 h8"/></svg>
+        <h3>Rare Coins</h3><p>U.S. and world numismatics — from Morgan dollars to key-date rarities. Collections welcome.</p>
+        <div class="tag">Collections appraised</div>
+      </div>
+      <div class="window card">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="27" r="8"/><path d="M17 20 l5 -9 5 9 M19.5 15.5 h5"/></svg>
+        <h3>Estate Jewelry</h3><p>Fine and antique pieces, signed or unsigned — evaluated for both intrinsic and collector value.</p>
+        <div class="tag">Estates welcome</div>
+      </div>
+      <div class="window card">
+        <svg viewBox="0 0 44 44"><path d="M22 8 l9 8 -9 20 -9 -20 z M13 16 h18 M22 8 l-4 8 4 20 4 -20 z"/></svg>
+        <h3>Diamonds</h3><p>Certified and uncertified stones, loose or mounted — assessed by cut, color, clarity and carat.</p>
+        <div class="tag">GIA-literate staff</div>
+      </div>
+      <div class="window card">
+        <svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="10"/><path d="M22 16 v6 l4 3 M18 9 h8 M18 35 h8 M17 12 l-1.5 -3 h13 l-1.5 3 M17 32 l-1.5 3 h13 l-1.5 -3"/></svg>
+        <h3>Fine Watches</h3><p>Vintage and modern timepieces — running or not. Bring the box and papers if you have them.</p>
+        <div class="tag">All conditions</div>
+      </div>
+      <div class="window card">
+        <svg viewBox="0 0 44 44"><path d="M15 8 v10 q0 4 3.5 4 v14 M15 8 h0 M12 8 v6 M18 8 v6 M29 8 q-4 6 -1 12 q2 3 2 4 v12"/></svg>
+        <h3>Sterling Flatware</h3><p>Sets and singles, weighed and priced by pattern and purity — Gorham to Tiffany.</p>
+        <div class="tag">Weighed in-store</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appraise" id="appraisal">
+  <div class="wrap">
+    <div class="appraise-grid">
+      <div class="pitch">
+        <div class="kicker" style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:12px">The appraisal</div>
+        <h2>Private. Unhurried.<br><span class="gold">In your presence, every step.</span></h2>
+        <p>Spot appraisals on a full range of items — or a written appraisal by appointment. Nothing leaves your sight: weighing, testing and valuation happen at the counter, explained as we go.</p>
+        <div class="assure">
+          <div><b>—</b> A safe, secure environment for every transaction</div>
+          <div><b>—</b> Thirty years of continuous, local operation</div>
+          <div><b>—</b> Appointment-only: the store is yours while you're here</div>
+        </div>
+      </div>
+      <div class="window book">
+        <div class="k">Book an appraisal</div>
+        <a class="phone" href="tel:+15105238000">510.523.8000</a>
+        <div style="font-size:11px;color:#8A6A24;letter-spacing:.14em;text-transform:uppercase">By appointment only</div>
+        <div class="hours">Tuesday – Friday · 10 am – 3 pm<br>Saturday · 10 am – 2 pm</div>
+        <a class="btn btn-gold" href="mailto:appointments@fortknoxofalameda.com?subject=Appraisal%20appointment">Request an appointment</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Visit</div>
+      <h2>Just over the Park Street bridge.</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="window visit-card">
+        <h3>Fort Knox Rare Coin &amp; Bullion</h3>
+        <p>1546 Park Street<br>Alameda, CA 94501<br><br>
+        Street parking on Park Street; municipal lots one block in either direction. The shop is discreet by design — look for the number, not a window display.</p>
+      </div>
+      <div class="window visit-card">
+        <iframe title="Map — 1546 Park Street, Alameda" loading="lazy"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-122.2465%2C37.7590%2C-122.2385%2C37.7650&layer=mapnik&marker=37.7620%2C-122.2425"></iframe>
+        <p style="margin-top:10px"><a href="https://maps.apple.com/?q=1546+Park+St+Alameda+CA" style="color:#8A6A24">Open in Maps →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="engraving" style="left:50%;bottom:-220px;transform:translateX(-50%);opacity:.08" aria-hidden="true">
+    <svg width="640" height="300" viewBox="40 40 640 300"><g stroke="currentColor" fill="none" stroke-width="1">
+      <circle cx="360" cy="150" r="130"/><circle cx="360" cy="150" r="112"/><circle cx="360" cy="150" r="94"/>
+      <path d="M248,150 C300,115 420,115 472,150 C420,185 300,185 248,150 Z"/>
+    </g></svg>
+  </div>
+  <div class="wrap">
+    <div class="hallmarks">
+      <div class="hallmark">Est. 30+ Years</div>
+      <div class="hallmark">Licensed &amp; Local</div>
+      <div class="hallmark">By Appointment</div>
+      <div class="hallmark">Private Transactions</div>
+    </div>
+    <div class="fine">© Fort Knox Rare Coin &amp; Bullion · 1546 Park Street, Alameda, California · <a href="tel:+15105238000">510.523.8000</a></div>
+    <div class="demo-note">Design concept by Merritt Digital · demonstration build · spot prices indicative until feed confirmed</div>
+  </div>
+</footer>
+
+<script>
+(async function(){
+  const fmt=(n,d)=>'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+  const st=document.getElementById('tick-status');
+  try{
+    const [au,ag]=await Promise.all([
+      fetch('https://api.gold-api.com/price/XAU').then(r=>r.json()),
+      fetch('https://api.gold-api.com/price/XAG').then(r=>r.json())
+    ]);
+    if(au&&au.price){document.getElementById('xau').textContent=fmt(au.price,0);}
+    if(ag&&ag.price){document.getElementById('xag').textContent=fmt(ag.price,2);}
+    st.innerHTML='<span class="dot"></span>live · updated '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  }catch(e){
+    st.innerHTML='<span class="dot" style="background:#D9A441"></span>indicative prices — live feed connects on the production domain';
+  }
+})();
+</script>
+</body>
+</html>

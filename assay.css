@@ -1,0 +1,187 @@
+:root{
+  --navy:#14213F; --navy-deep:#0E1830; --line:#8FA3C8;
+  --gold-1:#F3D98B; --gold-2:#C9A24B; --gold-3:#8A6A24;
+  --ivory:#FBF9F4; --ink:#1C2438; --ink-dim:#5A6478; --muted:#8B93A6;
+  --serif:'Iowan Old Style','Charter','Palatino',Georgia,serif;
+  --sans:-apple-system,'SF Pro Text','Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--navy);color:var(--ivory);font-family:var(--sans);line-height:1.55;
+     -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.gold{background:linear-gradient(160deg,var(--gold-1) 10%,var(--gold-2) 48%,var(--gold-3) 90%);
+      -webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px;position:relative}
+
+/* ── SITE NAV (shared, dependency-free — links visible, no dropdown) ── */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px 26px;flex-wrap:wrap;
+     max-width:1060px;margin:0 auto;padding:16px 22px;position:relative;z-index:4}
+.nav-brand{font-family:var(--serif);font-size:14px;letter-spacing:.28em;text-transform:uppercase;
+     color:var(--gold-1);text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+.nav-links a{font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+     color:var(--line);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;
+     position:relative;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-1)}
+.nav-links a.active::after,.nav-links a:hover::after{content:"";position:absolute;left:0;right:0;bottom:8px;
+     height:1px;background:linear-gradient(90deg,transparent,var(--gold-2),transparent)}
+@media(max-width:560px){.nav{justify-content:center;gap:4px}.nav-links{gap:16px}}
+
+/* ── ORNAMENT: engraved filigree, bleeding off-edge (the assay-card move) ── */
+.engraving{position:absolute;pointer-events:none;opacity:.16;color:var(--line)}
+.engraving svg{display:block}
+
+/* ── HERO ── */
+header{position:relative;overflow:hidden;padding:0 0 40px;background:
+  radial-gradient(140% 90% at 50% -30%, #1B2A52 0%, var(--navy) 55%, var(--navy-deep) 100%)}
+.edge-text{position:absolute;left:10px;top:120px;writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:10px;letter-spacing:.42em;color:var(--line);opacity:.75;text-transform:uppercase;font-family:var(--sans)}
+.hero{padding:44px 0 8px;text-align:center;position:relative;z-index:2}
+.crest{width:74px;height:74px;margin:0 auto 18px;border:1.5px solid var(--gold-2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;position:relative}
+.crest::after{content:"";position:absolute;inset:5px;border:.75px solid var(--gold-3);border-radius:50%;opacity:.7}
+.crest svg{width:38px;height:38px;stroke:var(--gold-1);fill:none;stroke-width:1.3}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,7vw,58px);letter-spacing:.22em;
+   text-indent:.22em;line-height:1.12}
+.sub{margin-top:12px;font-size:clamp(11px,2.6vw,13.5px);letter-spacing:.34em;text-indent:.34em;
+     text-transform:uppercase;color:var(--gold-2);font-family:var(--sans)}
+.est{margin-top:22px;font-family:var(--serif);font-style:italic;font-size:clamp(15px,3.4vw,18px);color:#C7D2E8}
+.hero-rule{width:120px;height:1px;margin:26px auto 0;background:linear-gradient(90deg,transparent,var(--gold-2),transparent)}
+.hero-cta{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 26px;border-radius:6px;font-size:13px;letter-spacing:.14em;
+     text-transform:uppercase;text-decoration:none;font-family:var(--sans)}
+.btn-gold{background:linear-gradient(160deg,var(--gold-1),var(--gold-2) 70%);color:#241A05;font-weight:650}
+.btn-line{border:1px solid var(--line);color:var(--ivory)}
+
+/* ── WHITE ASSAY WINDOW (the core device) ── */
+.window{background:var(--ivory);color:var(--ink);border-radius:16px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 24px 60px -28px rgba(0,0,0,.55);
+  position:relative;z-index:2}
+
+/* ── SPOT TICKER ── */
+.ticker{margin:44px auto 0;max-width:720px;padding:22px 26px 18px;text-align:center}
+.ticker .label{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8A6A24;margin-bottom:12px}
+.ticker .row{display:flex;justify-content:center;gap:8vw;flex-wrap:wrap}
+.metal .name{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.metal .price{font-family:var(--serif);font-size:clamp(30px,7vw,42px);font-weight:600;margin-top:2px;
+  background:linear-gradient(160deg,#A87F2E,#8A6A24);-webkit-background-clip:text;background-clip:text;color:transparent}
+.metal.silver .price{background:linear-gradient(160deg,#7C8798,#565F6E);-webkit-background-clip:text;background-clip:text;color:transparent}
+.metal .unit{font-size:10.5px;color:var(--muted);margin-top:2px}
+.ticker .status{margin-top:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.ticker .status .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#3FB27F;margin-right:6px;vertical-align:1px}
+
+/* ── SECTIONS ── */
+section{padding:64px 0;position:relative;overflow:hidden}
+.sec-head{text-align:center;margin-bottom:36px;position:relative;z-index:2}
+.sec-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,5vw,32px);letter-spacing:.12em;text-indent:.12em}
+.sec-head .kicker{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:10px}
+.sec-head p{max-width:56ch;margin:14px auto 0;color:#B9C4DA;font-size:15px}
+
+/* category cards */
+.cards{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;position:relative;z-index:2}
+.card{flex:1 1 280px;max-width:320px;padding:26px 24px 22px;text-align:center}
+@media(max-width:560px){.card{flex-basis:100%;max-width:none}}
+.card svg{width:44px;height:44px;stroke:#8A6A24;fill:none;stroke-width:1.4;margin-bottom:12px}
+.card h3{font-family:var(--serif);font-size:19px;letter-spacing:.06em;color:var(--ink)}
+.card p{font-size:13.5px;color:#5A6478;margin-top:8px;line-height:1.5}
+.card .tag{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:#8A6A24;border-top:1px solid #E4DCC8;padding-top:10px}
+
+/* appraisal band */
+.appraise{background:var(--navy-deep);border-top:1px solid rgba(143,163,200,.18);border-bottom:1px solid rgba(143,163,200,.18)}
+.appraise-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:26px;align-items:stretch;position:relative;z-index:2}
+@media(max-width:840px){.appraise-grid{grid-template-columns:1fr}}
+.appraise .pitch h2{font-family:var(--serif);font-size:clamp(24px,4.6vw,30px);letter-spacing:.06em;line-height:1.3}
+.appraise .pitch p{color:#B9C4DA;margin-top:14px;max-width:52ch}
+.assure{margin-top:20px;display:grid;gap:10px}
+.assure div{display:flex;gap:10px;align-items:baseline;font-size:14px;color:#D5DCEC}
+.assure b{color:var(--gold-1);font-weight:600}
+.book{padding:26px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.book .k{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:#8A6A24}
+.book .phone{font-family:var(--serif);font-size:clamp(26px,6vw,34px);font-weight:600;color:var(--ink);
+  text-decoration:none;display:block;margin:10px 0 2px}
+.book .hours{font-size:13px;color:#5A6478;line-height:1.7;margin-top:10px}
+.book .btn{margin-top:16px}
+
+/* visit */
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative;z-index:2}
+@media(max-width:840px){.visit-grid{grid-template-columns:1fr}}
+.visit-card{padding:26px}
+.visit-card h3{font-family:var(--serif);font-size:20px;color:var(--ink);letter-spacing:.04em}
+.visit-card p{font-size:14px;color:#5A6478;margin-top:10px;line-height:1.7}
+.visit-card iframe{width:100%;height:240px;border:0;border-radius:10px;margin-top:8px;filter:saturate(.85)}
+
+/* ── SUBPAGE HEADER (About / Testimonials / FAQ) ── */
+.page-head{position:relative;overflow:hidden;text-align:center;padding:14px 0 46px;background:
+  radial-gradient(140% 90% at 50% -40%, #1B2A52 0%, var(--navy) 60%, var(--navy-deep) 100%)}
+.page-head .kicker{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:12px}
+.page-head h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,6.4vw,46px);letter-spacing:.14em;
+  text-indent:.14em;line-height:1.14}
+.page-head .lede{max-width:58ch;margin:16px auto 0;color:#C7D2E8;font-size:clamp(14px,3vw,16px);
+  font-family:var(--serif);font-style:italic;line-height:1.6}
+
+/* ── ARTICLE WINDOW + PROSE ── */
+.article{padding:56px 0 64px;position:relative;overflow:hidden}
+.prose{padding:36px 34px;max-width:760px;margin:0 auto}
+@media(max-width:560px){.prose{padding:26px 20px}}
+.prose h2{font-family:var(--serif);font-weight:600;font-size:clamp(18px,3.8vw,22px);color:var(--ink);
+  letter-spacing:.03em;margin:26px 0 4px}
+.prose h2:first-child{margin-top:0}
+.prose p{font-size:15px;color:#464C5E;line-height:1.72;margin-top:10px}
+.prose p.intro{font-size:16px;font-style:italic;font-family:var(--serif);color:#3A4152}
+.prose a{color:#8A6A24}
+.prose .rule{height:1px;margin:26px 0 4px;background:linear-gradient(90deg,#E4DCC8,transparent)}
+
+/* ── TESTIMONIAL WALL (CSS masonry columns, no JS) ── */
+.quotes{column-count:2;column-gap:18px;max-width:900px;margin:0 auto;position:relative;z-index:2}
+@media(max-width:720px){.quotes{column-count:1}}
+.quote{break-inside:avoid;margin:0 0 18px;padding:24px 24px 20px}
+.quote p{font-family:var(--serif);font-style:italic;font-size:14.5px;line-height:1.62;color:var(--ink);margin-top:10px}
+.quote p:first-child{margin-top:0}
+.quote .who{margin-top:14px;font-family:var(--sans);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:#8A6A24}
+.quote .who span{color:var(--muted);letter-spacing:.14em}
+
+/* ── FAQ ACCORDION (native <details>, no JS) ── */
+.faq{max-width:760px;margin:0 auto;padding:14px 34px 26px}
+@media(max-width:560px){.faq{padding:12px 20px 20px}}
+.faq details{border-bottom:1px solid #E4DCC8}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-family:var(--serif);
+  font-size:clamp(16px,3.2vw,18px);color:var(--ink);letter-spacing:.01em;display:flex;
+  justify-content:space-between;gap:16px;align-items:baseline;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#8A6A24;font-family:var(--sans);font-size:22px;line-height:1;font-style:normal}
+.faq details[open] summary::after{content:"\2013"}
+.faq details p{padding:0 0 20px;font-size:15px;color:#464C5E;line-height:1.7;max-width:64ch}
+
+/* ── INVENTORY GRID (department item lists) ── */
+.inv-note{max-width:62ch;margin:0 auto 30px;text-align:center;color:#B9C4DA;font-size:14px;
+  position:relative;z-index:2;line-height:1.6}
+.inv{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative;z-index:2}
+@media(max-width:900px){.inv{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.inv{grid-template-columns:repeat(2,1fr)}}
+.inv-item{padding:14px 14px 16px;text-align:center;display:flex;flex-direction:column}
+.inv-item .ph{height:148px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:#fff;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(28,36,56,.06)}
+.inv-item img{max-width:100%;max-height:130px;width:auto;height:auto;object-fit:contain;display:block}
+.inv-item h3{font-family:var(--serif);font-size:15px;color:var(--ink);letter-spacing:.02em;line-height:1.25;margin-top:12px}
+.inv-item .spec{font-size:11.5px;letter-spacing:.04em;color:#8A6A24;margin-top:5px;min-height:1px}
+.back-link{display:inline-block;margin-top:16px;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--line);text-decoration:none}
+.back-link:hover{color:var(--gold-1)}
+
+/* clickable department cards (index) */
+a.card{text-decoration:none;color:inherit;transition:transform .18s ease, box-shadow .18s ease}
+a.card:hover{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(201,162,75,.55), 0 30px 62px -26px rgba(0,0,0,.6)}
+.card .go{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:#8A6A24;border-top:1px solid #E4DCC8;padding-top:10px;transition:color .18s}
+a.card:hover .go{color:var(--gold-3)}
+
+/* ── hallmarks footer ── */
+footer{padding:46px 0 40px;background:var(--navy-deep);text-align:center;position:relative;overflow:hidden}
+.hallmarks{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
+.hallmark{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--line);
+  border:1px solid rgba(143,163,200,.35);border-radius:4px;padding:8px 14px}
+.fine{margin-top:26px;font-size:11px;color:#6B7690;position:relative;z-index:2}
+.fine a{color:var(--line)}
+.demo-note{margin-top:14px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#4A5570}

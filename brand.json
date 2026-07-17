@@ -1,0 +1,13 @@
+{
+  "colors": {
+    "accent": "#C9A24B",
+    "accent2": "#F3D98B",
+    "ink": "#1C2438",
+    "paper": "#FBF9F4"
+  },
+  "background": {
+    "field": "#14213F",
+    "deep": "#0E1830"
+  },
+  "_doc": "Fort Knox Rare Coin & Bullion (Alameda) ratified brand tokens (MERRITT2.0 §B4 token-drift source). Bind elements with data-token=\"colors.accent\" etc.; the Proofer flags computed styles that drift. Blessed 2026-07-17 by merritt."
+}

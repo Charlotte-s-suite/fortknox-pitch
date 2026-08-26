@@ -67,6 +67,7 @@
       <div class="row">
         <div class="metal gold-m"><div class="name">Gold</div><div class="price" id="xau">$4,136</div><div class="unit">per troy ounce</div></div>
         <div class="metal silver"><div class="name">Silver</div><div class="price" id="xag">$61.68</div><div class="unit">per troy ounce</div></div>
+        <div class="metal platinum"><div class="name">Platinum</div><div class="price" id="xpt">$1,608</div><div class="unit">per troy ounce</div></div>
       </div>
       <div class="status" id="tick-status"><span class="dot"></span>indicative — connecting to live feed…</div>
     </div>
@@ -230,21 +231,25 @@
 (async function(){
   const fmt=(n,d)=>'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
   const st=document.getElementById('tick-status');
-  try{
-    const [au,ag]=await Promise.all([
-      fetch('https://api.gold-api.com/price/XAU').then(r=>r.json()),
-      fetch('https://api.gold-api.com/price/XAG').then(r=>r.json())
-    ]);
-    if(au&&au.price){document.getElementById('xau').textContent=fmt(au.price,0);}
-    if(ag&&ag.price){document.getElementById('xag').textContent=fmt(ag.price,2);}
+  // Per-metal independence: one feed failing must never blank the others —
+  // "a frozen ticker is worse than none" (brief). allSettled, not all().
+  const feeds=[['XAU','xau',0],['XAG','xag',2],['XPT','xpt',0]];
+  const results=await Promise.allSettled(
+    feeds.map(([sym])=>fetch('https://api.gold-api.com/price/'+sym).then(r=>r.json()))
+  );
+  let anyLive=false;
+  results.forEach((res,i)=>{
+    const [,id,d]=feeds[i];
+    if(res.status==='fulfilled'&&res.value&&res.value.price){
+      document.getElementById(id).textContent=fmt(res.value.price,d); anyLive=true;
+    }
+  });
+  if(anyLive){
     st.innerHTML='<span class="dot"></span>live · updated '+new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
-  }catch(e){
+  }else{
     st.innerHTML='<span class="dot" style="background:#D9A441"></span>indicative prices — live feed connects on the production domain';
   }
 })();
 </script>
-
-<!-- Merritt funnel instrumentation (M0.3): demo-view beacon, cookieless 1px. Remove/replace at production graduation to a client domain. -->
-<img src="https://merritt.shmaptech.com/beacon/fortknox.gif" alt="" width="1" height="1" style="position:absolute;opacity:0" loading="eager">
 </body>
 </html>

@@ -62,16 +62,20 @@ h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,7vw,58px);lette
 .ticker{margin:44px auto 0;max-width:720px;padding:22px 26px 18px;text-align:center}
 .ticker .label{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:#8A6A24;margin-bottom:12px}
 .ticker .row{display:flex;justify-content:center;gap:8vw;flex-wrap:wrap}
-.metal .name{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.metal .name{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim)}
 .metal .price{font-family:var(--serif);font-size:clamp(30px,7vw,42px);font-weight:600;margin-top:2px;
   background:linear-gradient(160deg,#A87F2E,#8A6A24);-webkit-background-clip:text;background-clip:text;color:transparent}
 .metal.silver .price{background:linear-gradient(160deg,#7C8798,#565F6E);-webkit-background-clip:text;background-clip:text;color:transparent}
-.metal .unit{font-size:10.5px;color:var(--muted);margin-top:2px}
-.ticker .status{margin-top:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.metal.platinum .price{background:linear-gradient(160deg,#7A8AA6,#525C76);-webkit-background-clip:text;background-clip:text;color:transparent}
+.metal .unit{font-size:10.5px;color:var(--ink-dim);margin-top:2px}
+.ticker .status{margin-top:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
 .ticker .status .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#3FB27F;margin-right:6px;vertical-align:1px}
 
 /* ── SECTIONS ── */
-section{padding:64px 0;position:relative;overflow:hidden}
+/* overflow:clip (not hidden) clips the bleeding engraved ornaments WITHOUT
+   making the section a scroll container — required so the scroll-reveal
+   view() timeline measures bands against the viewport, not the section. */
+section{padding:64px 0;position:relative;overflow:clip}
 .sec-head{text-align:center;margin-bottom:36px;position:relative;z-index:2}
 .sec-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,5vw,32px);letter-spacing:.12em;text-indent:.12em}
 .sec-head .kicker{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:10px}
@@ -189,3 +193,30 @@ footer{padding:46px 0 40px;background:var(--navy-deep);text-align:center;positio
 .fine{margin-top:26px;font-size:11px;color:#6B7690;position:relative;z-index:2}
 .fine a{color:var(--line)}
 .demo-note{margin-top:14px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#4A5570}
+
+/* ── SCROLL-REVEAL: rise-in on enter ───────────────────────────────
+   Reference pattern (library/recipe-anim-scroll-reveal.md) re-expressed
+   in assay tokens — no verbatim lift; the library file carries no
+   provenance/licence footer, so this is our own composition of the idea.
+   Bands lift one spacing step (~14px) and fade 0→1 as they cross in.
+   Scroll-driven, zero JS (single-CSS-file law); transform+opacity only.
+   Reveal the BAND as a unit — .cards stays whole so card hover-lift
+   (transform) is never overridden by the animation's forwards fill.
+   Reduce/no-support contract: motion lives inside the no-preference
+   query AND the @supports gate, so any engine without scroll-driven
+   timelines simply renders the bands normally — motion never gates
+   content. animation-duration:auto (not the shorthand's 0s) is what
+   maps the keyframes across the scroll range instead of snapping. */
+@media (prefers-reduced-motion:no-preference){
+  @supports (animation-timeline:view()){
+    .reveal{
+      animation-name:rise-in;
+      animation-duration:auto;
+      animation-fill-mode:both;
+      animation-timing-function:cubic-bezier(.22,.61,.36,1);
+      animation-timeline:view();
+      animation-range:entry 0% entry 55%;
+    }
+    @keyframes rise-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  }
+}

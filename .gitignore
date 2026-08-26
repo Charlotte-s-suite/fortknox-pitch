@@ -1,1 +1,5 @@
 node_modules/
+
+# Internal studio artifacts — client brief + build recipes. Public repo (GitHub Pages);
+# never track client material here (Standing Rule B). Read them from the tenant-state dir.
+library/
